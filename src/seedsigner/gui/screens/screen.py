@@ -671,13 +671,20 @@ class QRDisplayScreen(BaseScreen):
             self.renderer = renderer
             self.tips_start_time = tips_start_time
 
+
         def add_brightness_tips(self, image: Image.Image) -> None:
+            # TODO: Refactor ToastOverlay to support two lines of icon + text and use
+            # that instead of this more manual approach.
+
+            # Instantiate a temp Image and ImageDraw object to draw on
             rectangle_width = image.width
             rectangle_height = GUIConstants.COMPONENT_PADDING * 2 + GUIConstants.BODY_FONT_SIZE * 2 + GUIConstants.BODY_LINE_SPACING
             rectangle = Image.new('RGBA', (rectangle_width, rectangle_height), (0, 0, 0, 0))
             img_draw = ImageDraw.Draw(rectangle)
 
             overlay_opacity = 224
+
+            # Create a semi-transparent background for the overlay, rounded edges, w/a 1-pixel gap from the edges
             img_draw.rounded_rectangle((1, 0, rectangle_width - 2, rectangle_height - 1), radius=8, fill=(0, 0, 0, overlay_opacity))
 
             chevron_up_icon = Icon(
@@ -732,6 +739,7 @@ class QRDisplayScreen(BaseScreen):
                 allow_text_overflow=False
             ).render()
 
+            # Write our temp Image onto the main image
             image.paste(rectangle, (0, image.height - rectangle_height - 1), rectangle)
 
 
