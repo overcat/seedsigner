@@ -759,6 +759,7 @@ class QRDisplayScreen(BaseScreen):
                 # Target n held frames per second before rendering next QR image
                 time.sleep(5 / 30.0)
 
+
     def __post_init__(self):
         from seedsigner.models.settings import Settings
         super().__post_init__()
