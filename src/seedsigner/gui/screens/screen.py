@@ -705,6 +705,7 @@ class QRDisplayScreen(BaseScreen):
                 canvas=rectangle,
                 text="Brighter",
                 font_size=GUIConstants.BODY_FONT_SIZE,
+                font_name=GUIConstants.BUTTON_FONT_NAME,
                 background_color=(0, 0, 0, overlay_opacity),
                 edge_padding=0,
                 is_text_centered=False,
@@ -720,6 +721,7 @@ class QRDisplayScreen(BaseScreen):
                 canvas=rectangle,
                 text="Darker",
                 font_size=GUIConstants.BODY_FONT_SIZE,
+                font_name=GUIConstants.BUTTON_FONT_NAME,
                 background_color=(0, 0, 0, overlay_opacity),
                 edge_padding=0,
                 is_text_centered=False,
@@ -747,7 +749,7 @@ class QRDisplayScreen(BaseScreen):
                 image = self.qr_encoder.next_part_image(240, 240, border=2, background_color=hex_color)
 
                 # Display the brightness tips toast
-                duration = 10 ** 9 * 3  # 1 seconds
+                duration = 10 ** 9 * 1.2  # 1.2 seconds
                 if show_brightness_tips and time.time_ns() - self.tips_start_time.cur_count < duration:
                     self.add_brightness_tips(image)
 
